@@ -64,10 +64,12 @@
                             </div>
                         </a>
                          <div class="bg-yellow-500 rounded-lg shadow-lg p-6 text-gray-900">
+                            <a href="{{route('staff.pembayaran.history')}}">
                     <div class="flex flex-col">
                         <h5 class="text-lg font-semibold">Total Pendapatan</h5>
                         <span class="text-3xl font-bold mt-2">Rp {{ number_format($total_pendapatan, 0, ',', '.') }}</span>
                     </div>
+                    </a>
                 </div>
                     </div>
                 </div>

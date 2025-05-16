@@ -7,21 +7,22 @@
 
     <div class="py-6">
         <div class="max-w-[90rem] mx-auto sm:px-6 lg:px-8">
-            <!-- Kios Stats Section -->
+            <!-- Combined Kios and Kontrak Stats Section -->
             <div class="mb-6">
-                <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="border-b border-gray-200 ">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="border-b border-gray-200">
                         <div class="p-4 flex items-center">
                             <svg class="w-6 h-6 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
                             </svg>
-                            <h3 class="text-lg font-semibold text-gray-900 ">
-                                {{ __("Data Kios Overview") }}
+                            <h3 class="text-lg font-semibold text-gray-900">
+                                {{ __("Overview Statistics") }}
                             </h3>
                         </div>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+                        <!-- Kios Stats -->
                         <a href="{{route('admin.kios')}}" class="block">
                             <div class="bg-gradient-to-tr from-blue-600 to-blue-400 rounded-lg shadow-lg p-6 text-white hover:shadow-xl transition-all duration-200">
                                 <div class="flex items-center justify-between">
@@ -59,26 +60,8 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Kontrak Stats Section -->
-            <div>
-                <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="border-b border-gray-200 ">
-                        <div class="p-4 flex items-center">
-                            <svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"/>
-                            </svg>
-                            <h3 class="text-lg font-semibold text-gray-900 ">
-                                {{ __("Status Kontrak") }}
-                            </h3>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-6">
+                        <!-- Kontrak Stats -->
                         <a href="{{route('admin.kontrak')}}" class="block">
                             <div class="bg-gradient-to-tr from-yellow-600 to-yellow-400 rounded-lg shadow-lg p-6 text-white hover:shadow-xl transition-all duration-200">
                                 <div class="flex items-center justify-between">
@@ -120,15 +103,16 @@
                 </div>
             </div>
 
+            <!-- Jadwal Janji Section -->
             <div>
-                <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="border-b border-gray-200 ">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="border-b border-gray-200">
                         <div class="p-4 flex items-center">
                             <svg class="w-6 h-6 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
                                 <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"/>
                             </svg>
-                            <h3 class="text-lg font-semibold text-gray-900 ">
+                            <h3 class="text-lg font-semibold text-gray-900">
                                 {{ __("Jadwal Janji") }}
                             </h3>
                         </div>

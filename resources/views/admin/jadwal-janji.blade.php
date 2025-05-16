@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Riwayat Pengajuan Jadwal Janji') }}
+        <h2 class="font-semibold text-xl text-yellow-600 leading-tight">
+            {{ __('Pengajuan Jadwal Janji') }}
         </h2>
     </x-slot>
     @if (session('success'))
@@ -23,7 +23,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 border-b border-gray-200">
                     <h3 class="text-lg font-medium text-gray-900">
-                        {{ __("Data Riwayat Pengajuan Sewa") }}
+                        {{ __("Data Pengajuan Jadwal Janji") }}
                     </h3>
                 </div>
                 

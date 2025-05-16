@@ -90,41 +90,41 @@
                         @if($data[1]->count() > 0)
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 @foreach($data[1] as $kios)
-                                    <div class="bg-white border rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                        <div class="h-48 bg-gray-200 overflow-hidden relative">
+                                    <div class="relative h-[400px] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                        <!-- Background Image -->
+                                        <div class="absolute inset-0 w-full h-full">
                                             @if($kios->image)
                                                 <img src="{{ Storage::url($kios->image) }}" alt="{{ $kios->nama_kios }}" 
-                                                     class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                                                     class="w-full h-full object-cover">
                                             @else
-                                                <div class="w-full h-full flex items-center justify-center bg-gray-100">
-                                                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                                    </svg>
-                                                </div>
+                                                <div class="w-full h-full bg-gray-200"></div>
                                             @endif
+                                            <!-- Gradient Overlay -->
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                                         </div>
-                                        <div class="p-6">
+
+                                        <!-- Content -->
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                                             <h4 class="font-bold text-xl mb-2">{{ $kios->nama_kios }}</h4>
-                                            <p class="text-gray-600 mb-3 flex items-center gap-2">
+                                            <p class="mb-3 flex items-center gap-2 opacity-90">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 </svg>
                                                 {{ $kios->pasar->nama_pasar }}
                                             </p>
-                                            <p class="text-yellow-600 font-bold text-lg mb-4">
+                                            <p class="text-yellow-400 font-bold text-lg mb-2">
                                                 Rp {{ number_format($kios->harga_sewa, 0, ',', '.') }}/bulan
                                             </p>
-                                            <p class="text-sm text-gray-500">{{ $kios->ukuran }} m²</p>
-                                            <div class="flex items-center justify-between">
-                                                <span class="text-sm text-gray-500">{{ $kios->lokasi }}</span>
-                                                
-                                                <span class="px-3 py-1 bg-{{ $key == 'available' ? 'green' : 'red' }}-100 text-{{ $key == 'available' ? 'green' : 'red' }}-800 text-sm font-medium rounded-full">
+                                            <p class="text-sm opacity-90">{{ $kios->ukuran }} m²</p>
+                                            <div class="flex items-center justify-between mt-2">
+                                                <span class="text-sm opacity-90">{{ $kios->lokasi }}</span>
+                                                <span class="px-3 py-1 bg-{{ $key == 'available' ? 'green' : 'red' }}-500 text-white text-sm font-medium rounded-full">
                                                     {{ $key == 'available' ? 'Tersedia' : 'Terisi' }}
                                                 </span>
                                             </div>
                                             <a href="{{ route('pedagang.kios.show', $kios->id) }}" 
-                                               class="mt-4 inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                                               class="mt-4 inline-flex items-center gap-2 text-white hover:text-yellow-400 transition-colors duration-200">
                                                 <span>Lihat Detail</span>
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

@@ -23,7 +23,7 @@
             <div class="bg-white  overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 border-b border-gray-200 ">
                     <h3 class="text-lg font-medium text-gray-900 ">
-                        {{ __("Data Riwayat Pengajuan Sewa") }}
+                        {{ __("Data Riwayat Pengajuan Jadwal Janji") }}
                     </h3>
                 </div>
                 
