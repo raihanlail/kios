@@ -5,9 +5,23 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-16 w-auto fill-current text-gray-800 " />
-                    </a>
+                    @if(Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.dashboard') }}">
+                            <x-application-logo class="block h-16 w-auto fill-current text-gray-800" />
+                        </a>
+                    @elseif(Auth::user()->role == 'pedagang')
+                        <a href="{{ route('pedagang.dashboard') }}">
+                            <x-application-logo class="block h-16 w-auto fill-current text-gray-800" />
+                        </a>
+                    @elseif(Auth::user()->role == 'staff')
+                        <a href="{{ route('staff.dashboard') }}">
+                            <x-application-logo class="block h-16 w-auto fill-current text-gray-800" />
+                        </a>
+                    @elseif(Auth::user()->role == 'manager')
+                        <a href="{{ route('manager.dashboard') }}">
+                            <x-application-logo class="block h-16 w-auto fill-current text-gray-800" />
+                        </a>
+                    @endif
                 </div>
 
                 <!-- Navigation Links -->
@@ -42,6 +56,7 @@
                                     </x-dropdown-link>
                                 </x-slot>
                             </x-dropdown>
+                            
                         </div>
 
                         <div class="hidden sm:flex sm:items-center">
@@ -66,6 +81,9 @@
                                 </x-slot>
                             </x-dropdown>
                         </div>
+                         <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">
+                            {{ __('Kelola Data User') }}
+                        </x-nav-link>
                     @endif
 
                     @if(Auth::user()->role == 'pedagang') 
