@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sewa extends Model
 {
+    protected $casts = [
+    'tanggal_mulai' => 'date',
+    'tanggal_selesai' => 'date',
+    // ... casts lainnya
+];
     protected $fillable = [
         'kios_id',
         'pedagang_id',

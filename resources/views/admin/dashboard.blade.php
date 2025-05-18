@@ -159,6 +159,52 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Expired Sewa Section -->
+            <div class="mt-6">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="border-b border-gray-200">
+                        <div class="p-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+                            </svg>
+                            <h3 class="text-lg font-semibold text-gray-900">
+                                {{ __("Penyewaan Jatuh Tempo") }}
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kios</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pedagang</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Selesai</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @forelse ($sewa as $item)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{$item->kios->nomor_kios}}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{$item->pedagang->name}}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-red-600">{{$item->tanggal_selesai}}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="px-6 py-4 text-center text-gray-500">No expired sewa found</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4">
+                            {{ $sewa->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

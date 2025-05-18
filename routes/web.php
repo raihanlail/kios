@@ -29,6 +29,7 @@ Route::middleware(['auth', 'pedagangMiddleware'])->group(function () {
     Route::get('/pedagang/kios', [ShowKiosController::class, 'index'])->name('pedagang.kios');
     Route::get('/pedagang/kios/filter', [ShowKiosController::class, 'filterByPasar'])->name('pedagang.kios.filter');
     Route::get('/pedagang/kios/{id}', [ShowKiosController::class, 'show'])->name('pedagang.kios.show');
+    Route::get('/pedagang/owned-kios', [SewaController::class, 'OwnedKios'])->name('pedagang.owned-kios');
     Route::get('/pedagang/sewa/create/{kios}', [SewaController::class, 'create'])->name('sewa.create');
     Route::post('/pedagang/sewa', [SewaController::class, 'store'])->name('sewa.store');
     Route::get('/pedagang/sewa', [SewaController::class, 'index'])->name('pedagang.sewa.index');

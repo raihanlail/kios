@@ -82,4 +82,28 @@ public function index()
         'sewa' => $sewa
     ]);
 }
+
+public function OwnedKios()
+{
+    $sewa = Sewa::where('pedagang_id', Auth::id())
+        ->where('status', 'approved')
+        ->whereHas('pembayaran', function($query) {
+            $query->where('status', 'verified');
+        })
+        ->with(['kios', 'pembayaran'])
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('pedagang.owned-kios', [
+        'sewa' => $sewa
+    ]);
+}
+public function checkExpiredSewa()
+{
+    $expiredSewa = Sewa::where('status', 'approved')
+        ->whereDate('tanggal_selesai', '<=', Carbon::today())
+        ->update(['status' => 'pending']);
+
+    return $expiredSewa;
+}
 }

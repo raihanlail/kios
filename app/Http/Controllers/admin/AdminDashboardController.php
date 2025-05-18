@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\JadwalJanji;
 use App\Models\Kios;
 use App\Models\KontrakDigital;
+use App\Models\Sewa;
+use Carbon\Carbon;
+
+
 use Illuminate\Http\Request;
 
 
@@ -24,9 +28,17 @@ class AdminDashboardController extends Controller
         $count_available = $available_kios->count();
         $count_occupied = $occupied_kios->count();
 
+        // Add expired sewa functionality
+        $today = Carbon::today()->toDateString();
+        $sewa = Sewa::with(['kios', 'pedagang'])
+            ->where('status', 'approved')
+            ->whereDate('tanggal_selesai', '<=', $today)
+            ->orderBy('tanggal_selesai', 'asc')
+            ->paginate(10);
 
-        return view('admin.dashboard', compact('available_kios', 'occupied_kios', 'count_available', 'count_occupied', 'accepted_contracts', 'pending_contracts', 'accepted_jadwal', 'pending_jadwal'));
-        
+        return view('admin.dashboard', compact('available_kios', 'occupied_kios', 'count_available', 
+            'count_occupied', 'accepted_contracts', 'pending_contracts', 'accepted_jadwal', 
+            'pending_jadwal', 'sewa'));
     }
 
     public function show()
