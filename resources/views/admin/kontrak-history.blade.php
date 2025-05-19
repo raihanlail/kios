@@ -6,13 +6,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-[82rem] mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 
                  <div class="container mx-auto px-4">
                 <h2 class="text-2xl font-bold mb-6 px-8 pt-6">Riwayat Kontrak</h2>
                 
-               <div class="bg-white rounded-lg shadow-md">
+               <div class="bg-white border-2 border-yellow-500 rounded-lg shadow-md">
     <div class="p-6">
         <!-- Tambahkan form search di sini -->
         

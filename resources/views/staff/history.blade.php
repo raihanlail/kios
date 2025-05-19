@@ -12,7 +12,7 @@
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl font-bold mb-6 px-8 pt-6">Riwayat Data Pengajuan Pembayaran</h2>
                 
-                <div class="bg-white rounded-lg shadow-md">
+                <div class="bg-white border-2 border-yellow-500 rounded-lg shadow-md">
                     <div class="p-6">
                         <table class="min-w-full divide-y divide-gray-200 text-xs">
                             <thead>

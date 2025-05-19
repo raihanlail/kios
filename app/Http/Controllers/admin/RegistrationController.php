@@ -38,10 +38,50 @@ class RegistrationController extends Controller
 
         
     }
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,'.$id],
+            'role' => ['required', 'string', 'in:admin,manager,pedagang,staff'],
+        ]);
+
+        $updateData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+        ];
+
+        if ($request->filled('password')) {
+            $request->validate([
+                'password' => ['confirmed', Rules\Password::defaults()],
+            ]);
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($updateData);
+
+        return redirect()->route('admin.users')->with('success', 'User updated successfully.');
+    }
+
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        
+        // Update kios status to available for all related sewa records
+        foreach ($user->sewa as $sewa) {
+            if ($sewa->kios) {
+                $sewa->kios->update(['status' => 'available']);
+            }
+        }
+
+        // Delete related sewa records
+        $user->sewa()->delete();
+
+        // Then delete the user
         $user->delete();
 
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');

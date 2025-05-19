@@ -63,6 +63,8 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/jadwaljanji/history', [JadwalJanjiController::class, 'history'])->name('admin.jadwaljanji.history');
     Route::get('/admin/users', [RegistrationController::class, 'index'])->name('admin.users');
     Route::post('/admin/users', [RegistrationController::class, 'store'])->name('admin.users.store');
+    Route::delete('/admin/users/{id}', [RegistrationController::class, 'destroy'])->name('admin.users.destroy');
+    Route::put('/admin/users/{id}', [RegistrationController::class, 'update'])->name('admin.users.update');
 });
 Route::middleware(['auth', 'staffMiddleware'])->group(function () {
     Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])->name('staff.dashboard');

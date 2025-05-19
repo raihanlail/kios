@@ -50,6 +50,7 @@
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -61,7 +62,26 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $g->email }}</td>
                         
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $g->role }}</td>
-                        
+                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <x-secondary-button x-data=""
+                                                x-on:click.prevent="$dispatch('open-modal', 'editUserModal')"
+                                                @click="
+                                                    $dispatch('set-user-data', {
+                                                        id: '{{ $g->id }}',
+                                                        name: '{{ $g->name }}',
+                                                        email: '{{ $g->email }}',
+                                                        role: '{{ $g->role }}'
+                                                    })
+                                                "
+                                                class="text-blue-600 hover:text-blue-900">{{ __('Edit') }}</x-secondary-button>
+                                                  
+                            <x-danger-button x-data=""
+                                                x-on:click.prevent="$dispatch('open-modal', 'deleteUserModal'); $dispatch('set-user-data', {
+        id: '{{ $g->id }}',
+        nama: '{{ $g->name }}'
+    })">
+                                                {{ __('Delete') }}
+                                            </x-danger-button></td>
                        
                        
                     </tr>
@@ -91,7 +111,7 @@
         </div>
     </div>
 
-    <!-- Modal Tambah Kios -->
+    <!-- Modal Tambah User -->
     <x-modal name="tambahUserModal" focusable>
         <div class="p-6 bg-white rounded-lg shadow-xl border border-gray-700 max-w-2xl mx-auto">
             <div class="flex items-center justify-between mb-6">
@@ -172,6 +192,102 @@
                 </div>
             </form>
         </div>
+    </x-modal>
+
+    <x-modal name="editUserModal" focusable>
+        <div class="p-6 bg-white rounded-lg shadow-xl border border-gray-700 max-w-2xl mx-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-900">{{ __('Edit Data User') }}</h2>
+                <button x-on:click="$dispatch('close')" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form x-data="{ userData: {} }" @set-user-data.window="userData = $event.detail"
+                x-bind:action="'/admin/users/' + userData.id" method="POST" class="space-y-6">
+                @csrf
+                @method('PUT')
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Name -->
+                    <div class="space-y-2">
+                        <x-input-label for="edit_name" value="{{ __('Nama') }}" />
+                        <x-text-input id="edit_name" name="name" type="text" 
+                            class="mt-1 block w-full"
+                            x-bind:value="userData.name" 
+                            required />
+                    </div>
+
+                    <!-- Email -->
+                    <div class="space-y-2">
+                        <x-input-label for="edit_email" value="{{ __('Email') }}" />
+                        <x-text-input id="edit_email" name="email" type="email" 
+                            class="mt-1 block w-full"
+                            x-bind:value="userData.email"
+                            required />
+                    </div>
+
+                    <!-- Role -->
+                    <div class="space-y-2">
+                        <x-input-label for="edit_role" value="{{ __('Role') }}" />
+                        <select name="role" id="edit_role" required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <option value="admin" x-bind:selected="userData.role === 'admin'">Admin</option>
+                            <option value="manager" x-bind:selected="userData.role === 'manager'">Manager</option>
+                            <option value="pedagang" x-bind:selected="userData.role === 'pedagang'">Pedagang</option>
+                            <option value="staff" x-bind:selected="userData.role === 'staff'">Staff</option>
+                        </select>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="space-y-2">
+                        <x-input-label for="edit_password" value="{{ __('Password Baru (opsional)') }}" />
+                        <x-text-input id="edit_password" name="password" type="password" 
+                            class="mt-1 block w-full" />
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-end pt-6 border-t border-gray-200 gap-3">
+                    <x-secondary-button type="button" x-on:click="$dispatch('close')">
+                        {{ __('Batal') }}
+                    </x-secondary-button>
+                    <x-primary-button>
+                        {{ __('Simpan Perubahan') }}
+                    </x-primary-button>
+                </div>
+            </form>
+        </div>
+    </x-modal>
+
+     <x-modal name="deleteUserModal" focusable>
+         <div class="relative bg-white rounded-lg shadow-xl">
+                <!-- Modal Header -->
+                <div class="flex items-start justify-between p-4 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Konfirmasi Hapus
+                    </h3>
+                </div>
+                <div class="p-4">
+                    <form x-data="{ userData: {} }" @set-user-data.window="userData = $event.detail"
+                        x-bind:action="'/admin/users/' + userData.id" method="POST" class="space-y-4">
+                        @csrf
+                        @method('DELETE')
+                        <p class="text-gray-600">Yakin menghapus user <span x-text="userData.nama"
+                                class="font-semibold"></span>?</p>
+                        <div class="flex justify-end gap-2">
+                            <x-secondary-button type="button" x-on:click="$dispatch('close')">
+                                {{ __('Batal') }}
+                            </x-secondary-button>
+                            <x-danger-button>
+                                {{ __('Hapus') }}
+                            </x-danger-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
     </x-modal>
 
     
