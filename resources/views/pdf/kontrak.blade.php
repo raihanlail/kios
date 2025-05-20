@@ -82,7 +82,7 @@
             <div class="clause-title">PIHAK PERTAMA (PENYEWA):</div>
             <div>Nama: <strong>{{ strtoupper($pedagang->name) }}</strong></div>
             <div>Email: {{ $pedagang->email }}</div>
-            <div>NIK: {{ $pedagang->nik ?? '-' }}</div>
+            <div>NIK: {{ $sewa->no_ktp ?? '-' }}</div>
         </div>
         
         <div class="party">
