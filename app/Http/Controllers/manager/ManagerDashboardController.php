@@ -7,8 +7,10 @@ use App\Models\Kios;
 use App\Models\Pasar;
 use App\Models\Pembayaran;
 use App\Models\Sewa;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -53,23 +55,67 @@ class ManagerDashboardController extends Controller
     ));
 }
 
-    public function showKios()
+    public function showKios( Request $request)
     {
-        $kios = Kios::with('pasar')->paginate(10);
-        $pasars = Pasar::all();
-        return view('manager.kios', compact('kios', 'pasars'));
+       $pasars = Pasar::all();
+    $pasar_id = $request->input('pasar_id');
+    
+    $query = Kios::with('pasar');
+    
+    if ($pasar_id) {
+        $query->where('pasar_id', $pasar_id);
+    }
+    
+    $kios = $query->paginate(10);
+
+    return view('manager.kios', [
+        'kios' => $kios,
+        'pasars' => $pasars,
+        'selected_pasar' => $pasar_id
+    ]);
     }
 
-    public function showAvailableKios()
+    public function showAvailableKios(Request $request)
     {
-        $kios = Kios::with('pasar')->where('status', 'available')->paginate(10);
-        return view('manager.kios-available', compact('kios'));
+        $pasars = Pasar::all();
+        $pasar_id = $request->input('pasar_id');
+        
+        $query = Kios::with('pasar')->where('status', 'available');
+        
+        if ($pasar_id) {
+            $query->where('pasar_id', $pasar_id);
+        }
+        
+        $kios = $query->paginate(10);
+
+        return view('manager.kios-available', [
+            'kios' => $kios,
+            'pasars' => $pasars,
+            'selected_pasar' => $pasar_id
+        ]);
     }
-    public function showOccupiedKios()
+
+    public function showOccupiedKios(Request $request)
     {
-        $kios = Kios::with('pasar')->where('status', 'occupied')->paginate(10);
-        return view('manager.kios-occupied', compact('kios'));
+        $pasars = Pasar::all();
+        $pasar_id = $request->input('pasar_id');
+        
+        $query = Kios::with('pasar')->where('status', 'occupied');
+        
+        if ($pasar_id) {
+            $query->where('pasar_id', $pasar_id);
+        }
+        
+        $kios = $query->paginate(10);
+
+        return view('manager.kios-occupied', [
+            'kios' => $kios,
+            'pasars' => $pasars,
+            'selected_pasar' => $pasar_id
+        ]);
     }
+
+    
 
     public function filterByPasar(Request $request)
 {
@@ -104,6 +150,17 @@ class ManagerDashboardController extends Controller
 
         return view('manager.pembayaran', compact('pembayaran'));
     }
+
+     public function downloadHistoryPdf()
+{
+    $pembayaran = Pembayaran::with(['sewa', 'sewa.pedagang'])
+        ->latest()
+        ->get(); // Gunakan get() bukan paginate() untuk semua data
+
+    $pdf = Pdf::loadView('pdf.staff', compact('pembayaran'));
+    
+    return $pdf->download('laporan-pembayaran-'.now()->format('Y-m-d').'.pdf');
+}
 
     public function show()
     {

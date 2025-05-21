@@ -46,6 +46,7 @@ Route::middleware(['auth', 'managerMiddleware'])->group(function () {
     Route::get('/manager/kios/occupied', [ManagerDashboardController::class, 'showOccupiedKios'])->name('manager.kios.occupied');
     Route::get('/manager/kios/filter', [ManagerDashboardController::class, 'filterByPasar'])->name('manager.kios.filter');
     Route::get('manager/pembayaran', [ManagerDashboardController::class, 'showPembayaran'])->name('manager.pembayaran');
+    Route::get('manager/pembayaran/download', [ManagerDashboardController::class, 'downloadHistoryPdf'])->name('manager.pembayaran.download');
 });
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');

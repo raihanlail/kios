@@ -9,10 +9,20 @@
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 
-            <div class="container mx-auto px-4 border-2 border-yellow-500">
-                <h2 class="text-2xl font-bold mb-6 px-8 pt-6">Riwayat data pemesanan</h2>
+            <div class="container mx-auto px-4 ">
+              <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Riwayat Data Pengajuan Pembayaran</h2>
+                        
+                        <a href="{{ route('manager.pembayaran.download') }}" 
+                            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out inline-flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Download PDF
+                        </a>
+                    </div>
                 
-                <div class="bg-white rounded-lg shadow-md">
+                <div class="bg-white rounded-lg shadow-md border-2 border-yellow-500">
                     <div class="p-6">
                         <table class="min-w-full divide-y divide-gray-200 text-xs">
                             <thead>
