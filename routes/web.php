@@ -70,6 +70,7 @@ Route::middleware(['auth', 'staffMiddleware'])->group(function () {
     Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])->name('staff.dashboard');
     Route::get('/staff/pembayaran', [StaffPembayaranController::class, 'index'])->name('staff.pembayaran.index');
     Route::get('/staff/pembayaran/history', [StaffPembayaranController::class, 'history'])->name('staff.pembayaran.history');
+    Route::get('/staff/pembayaran/download', [StaffPembayaranController::class, 'downloadHistoryPdf'])->name('staff.pembayaran.download');
     Route::post('/staff/pembayaran/{pembayaran}/approve', [StaffPembayaranController::class, 'approve'])->name('staff.pembayaran.approve');
     Route::post('/staff/pembayaran/{pembayaran}/reject', [StaffPembayaranController::class, 'reject'])->name('staff.pembayaran.reject');
 });

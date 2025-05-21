@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\staff;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kios;
 use App\Models\Pembayaran;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use Illuminate\Http\Request;
 
 
@@ -17,6 +20,10 @@ class StaffDashboardController extends Controller
         $total_pendapatan = Pembayaran::where('status', 'verified')->sum('jumlah');
 
         return view('staff.dashboard', compact('pending_pembayaran', 'verified_pembayaran', 'total_pembayaran', 'total_pendapatan'));
+    }
+    public function generateReport()
+    {
+        return view('staff.generate-report');
     }
 
     public function show()

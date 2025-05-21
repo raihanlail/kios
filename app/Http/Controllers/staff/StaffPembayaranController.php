@@ -36,6 +36,16 @@ class StaffPembayaranController extends Controller
 
         return view('staff.history', compact('pembayaran'));
     }
+    public function downloadHistoryPdf()
+{
+    $pembayaran = Pembayaran::with(['sewa', 'sewa.pedagang'])
+        ->latest()
+        ->get(); // Gunakan get() bukan paginate() untuk semua data
+
+    $pdf = Pdf::loadView('pdf.staff', compact('pembayaran'));
+    
+    return $pdf->download('laporan-pembayaran-'.now()->format('Y-m-d').'.pdf');
+}
 
     public function approve(Pembayaran $pembayaran)
     {

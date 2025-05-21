@@ -103,6 +103,22 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- E-Wallet Info -->
+<div id="ewallet-info" class="bg-blue-50 p-4 rounded-lg border border-blue-200" style="display: none;">
+    <h4 class="font-medium text-blue-800 mb-2">E-Wallet Payment</h4>
+    <div class="space-y-2">
+        <div class="flex justify-between">
+            <span class="text-gray-600">Nomor:</span>
+            <span class="font-medium">084273492734</span>
+        </div>
+        <div class="flex justify-between">
+            <span class="text-gray-600">Tersedia:</span>
+            <span class="font-medium">Dana/GoPay</span>
+        </div>
+    </div>
+</div>
+
                         </div>
 
                         <!-- Payment Proof -->
@@ -170,11 +186,19 @@
             }
         });
 
-        // Toggle bank info visibility based on payment method
+        // Toggle payment info visibility based on payment method
         const bankInfo = document.getElementById('bank-info');
+        const ewalletInfo = document.getElementById('ewallet-info');
+        
         document.querySelectorAll('input[name="metode_pembayaran"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                bankInfo.style.display = this.value === 'transfer' ? 'block' : 'none';
+                if (this.value === 'transfer') {
+                    bankInfo.style.display = 'block';
+                    ewalletInfo.style.display = 'none';
+                } else if (this.value === 'ewallet') {
+                    bankInfo.style.display = 'none'; 
+                    ewalletInfo.style.display = 'block';
+                }
             });
         });
     </script>

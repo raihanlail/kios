@@ -80,6 +80,12 @@ class KiosController extends Controller
         $kios = Kios::findOrFail($id);
         $data = $request->all();
 
+        // Check if status changed from occupied to available
+        if ($kios->status === 'occupied' && $request->status === 'available') {
+            // Delete all related sewa records
+            $kios->sewa()->delete();
+        }
+
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($kios->image);
             $imagePath = $request->file('image')->store('kios', 'public');
