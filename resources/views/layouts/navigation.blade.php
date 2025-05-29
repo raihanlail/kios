@@ -164,6 +164,9 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
+                     <x-nav-link :href="route('manager.kontrak')" :active="request()->routeIs('manager.kontrak')">
+                        {{ __('ACC Kontrak') }}
+                    </x-nav-link>
                      <x-nav-link :href="route('manager.pembayaran')" :active="request()->routeIs('manager.pembayaran')">
                         {{ __('Data Pembayaran') }}
                     </x-nav-link>

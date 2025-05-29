@@ -4,66 +4,66 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>KONTRAK SEWA KIOS</title>
     <style>
-        @page { margin: 2cm }
+         @page { margin: 1.5cm } /* Reduced margin */
         body { 
             font-family: 'Times New Roman', Times, serif; 
-            font-size: 12pt; 
-            line-height: 1.5;
+            font-size: 11pt; /* Reduced from 12pt */
+            line-height: 1.3; /* Reduced from 1.5 */
             background: url('{{ public_path("images/watermark.png") }}') repeat;
+        }
+        .letterhead {
+            text-align: center;
+            margin-bottom: 15px; /* Reduced from 20px */
+        }
+        .company-name {
+            font-size: 14pt; /* Reduced from 16pt */
+            font-weight: bold;
+            margin-bottom: 3px; /* Reduced from 5px */
+        }
+        .company-tagline {
+            font-size: 10pt; /* Reduced from 12pt */
+            font-style: italic;
+            margin-bottom: 3px;
+        }
+        .company-address {
+            font-size: 9pt; /* Reduced from 11pt */
+            margin-bottom: 3px;
+        }
+        .letterhead-line {
+            border-bottom: 2px solid #000; /* Reduced from 3px */
+            margin-top: 8px;
+            margin-bottom: 15px;
         }
         .header { 
             text-align: center; 
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 25px; /* Reduced from 30px */
         }
         .title { 
-            font-size: 14pt; 
+            font-size: 12pt; /* Reduced from 14pt */
             font-weight: bold; 
             text-decoration: underline;
             text-transform: uppercase;
         }
-        .document-number {
-            color: #333;
-            font-weight: bold;
-            margin: 10px 0;
-        }
         .parties { 
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
+            margin: 15px 0;
+            padding: 12px; /* Reduced from 15px */
         }
         .clause { 
-            margin: 15px 0;
-            text-align: justify;
+            margin: 12px 0; /* Reduced from 15px */
         }
         .clause-title { 
             font-weight: bold;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #000;
+            margin-bottom: 8px;
         }
         .signature-area { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-top: 50px; 
-            page-break-inside: avoid;
-        }
-        .signature-box { 
-            width: 45%; 
-            text-align: center;
+            margin-top: 40px; /* Reduced from 50px */
         }
         .signature-line { 
-            border-top: 1px solid #000; 
-            width: 80%; 
-            margin: 50px auto 0 auto;
+            width: 75%; /* Reduced from 80% */
+            margin: 40px auto 0 auto; /* Reduced from 50px */
         }
         .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 9pt;
-            color: #666;
+            font-size: 8pt; /* Reduced from 9pt */
         }
         .page-number:after {
             content: counter(page);
@@ -71,6 +71,19 @@
     </style>
 </head>
 <body>
+    <!-- Kop Surat -->
+    <div class="letterhead">
+        <div class="company-name">PERUMDA PASAR PAKUAN JAYA</div>
+        <div class="company-tagline">"Pasar Bersih Belanja Nyaman Pedagang Untung"</div>
+        <div class="company-address">
+           Blok F Trade Center Pasar Kebon Kembang Lt. 3, Jl. Dewi Sartika, Cibogor, Bogor Tengah, Kota Bogor<br>
+            Telp: +62251 8330313 | Email: info@pasarpakuanjaya.co.id<br>
+            Website: https://pasarpakuanjaya.co.id/
+        </div>
+        <div class="letterhead-line"></div>
+    </div>
+
+    <!-- Konten Dokumen -->
     <div class="header">
         <div class="title">KONTRAK SEWA KIOS</div>
         <div class="document-number">Nomor: {{ sprintf('KSK-%04d/%s/%s', $sewa->id, date('m'), date('Y')) }}</div>
@@ -121,7 +134,7 @@
         <div class="signature-box">
             <div>PIHAK KEDUA</div>
             <div class="signature-line"></div>
-            <div>({{ strtoupper(auth()->user()->name) }})</div>
+            <div>MANAGER UMUM</div>
         </div>
     </div>
 

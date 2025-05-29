@@ -12,12 +12,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ApplyJadwalJanjiController extends Controller
 {
-    public function store(Request $request)
-    {
+  public function store(Request $request)
+{
+    try {
         $validated = $request->validate([
             'sewa_id' => 'required|exists:sewas,id',
-            'tanggal' => 'required|date',
+            'tanggal' => 'required|date|unique:jadwal_janjis,tanggal',
         ]);
+
+        $existingAppointment = JadwalJanji::where('tanggal', $validated['tanggal'])->first();
+        
+        if ($existingAppointment) {
+            return redirect()->back()->with('error', 'Tanggal tersebut sudah dipilih oleh user lain. Silakan pilih tanggal lain.');
+        }
 
         $jadwalJanji = JadwalJanji::create([
             'sewa_id' => $validated['sewa_id'],
@@ -25,8 +32,14 @@ class ApplyJadwalJanjiController extends Controller
             'status' => 'pending'
         ]);
 
-       return redirect()->route('pedagang.jadwaljanji.index')->with('success', 'Jadwal janji berhasil dibuat.');
+        return redirect()->route('pedagang.jadwaljanji.index')->with('success', 'Jadwal janji berhasil dibuat.');
+        
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return redirect()->back()
+            ->withErrors($e->validator)
+            ->with('error', 'Tanggal ini tidak tersedia. Silahkan pilih tanggal lain');
     }
+}
 
     public function index()
     {

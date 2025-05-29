@@ -7,6 +7,29 @@
          @page {
             size: landscape;
         }
+        .letterhead {
+            text-align: center;
+            margin-bottom: 15px; /* Reduced from 20px */
+        }
+        .company-name {
+            font-size: 14pt; /* Reduced from 16pt */
+            font-weight: bold;
+            margin-bottom: 3px; /* Reduced from 5px */
+        }
+        .company-tagline {
+            font-size: 10pt; /* Reduced from 12pt */
+            font-style: italic;
+            margin-bottom: 3px;
+        }
+        .company-address {
+            font-size: 9pt; /* Reduced from 11pt */
+            margin-bottom: 3px;
+        }
+        .letterhead-line {
+            border-bottom: 2px solid #000; /* Reduced from 3px */
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
         body { 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -25,9 +48,21 @@
     </style>
 </head>
 <body>
+     <div class="letterhead">
+        <div class="company-name">PERUMDA PASAR PAKUAN JAYA</div>
+        <div class="company-tagline">"Pasar Bersih Belanja Nyaman Pedagang Untung"</div>
+        <div class="company-address">
+           Blok F Trade Center Pasar Kebon Kembang Lt. 3, Jl. Dewi Sartika, Cibogor, Bogor Tengah, Kota Bogor<br>
+            Telp: +62251 8330313 | Email: info@pasarpakuanjaya.co.id<br>
+            Website: https://pasarpakuanjaya.co.id/
+        </div>
+        <div class="letterhead-line"></div>
+    </div>
     <div class="header">
-        <h1>Laporan Keuangan</h1>
-        <p>Dicetak pada: {{ now()->format('d F Y H:i:s') }}</p>
+        <h1>LAPORAN KEUANGAN SEWA KIOS</h1>
+        <p>Sistem Manajemen Pasar</p>
+        <p>Periode: {{ now()->startOfMonth()->format('d F Y') }} - {{ now()->endOfMonth()->format('d F Y') }}</p>
+        <p>Waktu Cetak: {{ now()->format('d F Y H:i:s') }}</p>
     </div>
 
     <table>

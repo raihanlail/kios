@@ -17,6 +17,19 @@
         </div>
     </div>
 @endif
+ @if (session('error'))
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div id="alert-error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline">{{ session('error') }}</span>
+            <button onclick="document.getElementById('alert-error').remove()" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <title>Close</title>
+                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -81,10 +94,17 @@
                                                         </svg>
                                                         Lunas
                                                     </span>
-                                                @endif
+                                                @elseif($g->status == 'pending')
+                                                    <span class="px-2 py-1 inline-flex items-center rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+                                                        </svg>
+                                                        Pending
+                                                    </span>
+                                                    @endif
                                             </td>
                                             <td class="px-3 py-3 lg:px-6 lg:py-4 whitespace-nowrap">
-                                                @if($g->status == 'approved' && $g->kontrak)
+                                                @if($g->status == 'approved' && $g->kontrak && $g->kontrak->manager_acc == 'accepted') 
                                                     <a href="{{ route('kontrak.download', $g->kontrak) }}" 
                                                        class="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors duration-200">
                                                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -92,54 +112,60 @@
                                                         </svg>
                                                         <span>Download</span>
                                                     </a>
-                                                @endif
+                                                @else
+                                                <span class="px-2 py-1 inline-flex items-center rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                       
+                                                        Belum Disetujui
+                                                    </span>
+                                                    @endif
                                             </td>
-                                             <td class="px-3 py-3 lg:px-6 lg:py-4 whitespace-nowrap">
-                                                @if($g->status == 'approved')
-                                                    <button x-data="" x-on:click="$dispatch('open-modal', 'create-jadwal-{{ $g->id }}')"
-                                                        class="inline-flex items-center px-4 py-2 bg-yellow-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                                        Buat Jadwal
-                                                    </button>
+                                            <td class="px-3 py-3 lg:px-6 lg:py-4 whitespace-nowrap">
+    @if($g->status == 'approved' && $g->kontrak->manager_acc == 'accepted')
+        <button x-data="" x-on:click="$dispatch('open-modal', 'create-jadwal-{{ $g->id }}')"
+            class="inline-flex items-center px-4 py-2 bg-yellow-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+            Buat Jadwal
+        </button>
 
-                                                    <x-modal name="create-jadwal-{{ $g->id }}" focusable>
-                                                        <form method="POST" action="{{ route('pedagang.jadwaljanji.store') }}" class="p-6">
-                                                            @csrf
-                                                            <input type="hidden" name="sewa_id" value="{{ $g->id }}">
-                                                            
-                                                            <h2 class="text-lg font-medium text-gray-900">
-                                                                Buat Jadwal Janji
-                                                            </h2>
-                                                            <div class="mt-2 max-w-3/4">
+        <x-modal name="create-jadwal-{{ $g->id }}" focusable>
+            <form method="POST" action="{{ route('pedagang.jadwaljanji.store') }}" class="p-6">
+                @csrf
+                <input type="hidden" name="sewa_id" value="{{ $g->id }}">
+                
+                <h2 class="text-lg font-medium text-gray-900">
+                    Buat Jadwal Janji
+                </h2>
+                <div class="mt-2 max-w-3/4">
+                    <p class="text-base font-medium text-gray-900 pr-48">
+                        Silakan pilih tanggal untuk membuat jadwal janji untuk penyerahan kunci kios. 
+                    </p>
+                    <p class="text-base font-medium text-gray-900 pr-48">
+                       mohon sertakan file kontrak yang sudah diunduh saat pertemuan.
+                    </p>
+                </div>
 
-                                                                <p class="text-base font-medium text-gray-900 pr-48">
-                                                                    Silakan pilih tanggal untuk membuat jadwal janji untuk penyerahan kunci kios. 
-    
-                                                                </p>
-                                                                <p class="text-base font-medium text-gray-900 pr-48">
-                                                                   mohon sertakan file kontrak yang sudah diunduh saat pertemuan.
-    
-                                                                </p>
-                                                            </div>
+                <div class="mt-6">
+                   <label for="tanggal" class="block text-sm font-medium text-gray-700">
+                        Tanggal
+                    </label>
+                    <input id="tanggal" type="date" name="tanggal" class="mt-1 block w-full" required />
+                    @error('tanggal')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
 
-                                                            <div class="mt-6">
-                                                               <label for="tanggal" class="block text-sm font-medium text-gray-700">
-                                                                    Tanggal
-                                                                <input id="tanggal" type="date" name="tanggal" class="mt-1 block w-full" required />
-                                                            </div>
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="$dispatch('close')">
+                        Batal
+                    </x-secondary-button>
 
-                                                            <div class="mt-6 flex justify-end">
-                                                                <x-secondary-button x-on:click="$dispatch('close')">
-                                                                    Batal
-                                                                </x-secondary-button>
-
-                                                                <x-primary-button class="ml-3">
-                                                                    Buat Jadwal
-                                                                </x-primary-button>
-                                                            </div>
-                                                        </form>
-                                                    </x-modal>
-                                                @endif
-                                            </td>
+                    <x-primary-button class="ml-3">
+                        Buat Jadwal
+                    </x-primary-button>
+                </div>
+            </form>
+        </x-modal>
+    @endif
+</td>
                                         </tr>
                                     @empty
                                         <tr>

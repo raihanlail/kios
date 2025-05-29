@@ -12,7 +12,8 @@ class KontrakDigital extends Model
         'admin_id',
         'isi_kontrak',
         'file_kontrak',
-        'status'
+        'status',
+        'manager_acc'
     ];
 
     public function sewa()

@@ -23,7 +23,7 @@
             <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
                 
                  <div class="container mx-auto px-4">
-                <h2 class="text-2xl font-bold mb-6 ">Buat Verifikasi Kontrak</h2>
+                <h2 class="text-2xl font-bold mb-6 ">Buat Kontrak</h2>
                 
                 <div class="bg-white border-2 border-yellow-500 rounded-lg shadow-md">
                     <div class="p-6">
@@ -53,7 +53,7 @@
                                     <td class="px-4 py-2 whitespace-nowrap text-xs">
                                         <form action="{{ route('admin.kontrak.approve', $item) }}" method="POST" class="inline">
                                             @csrf
-                                            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md mr-2 text-xs">Setujui</button>
+                                            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md mr-2 text-xs">Buat Kontrak</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\KiosController;
 use App\Http\Controllers\admin\RegistrationController;
 use App\Http\Controllers\admin\ShowKontrakController;
 use App\Http\Controllers\manager\ManagerDashboardController;
+use App\Http\Controllers\manager\ManagerKontrakController;
 use App\Http\Controllers\pedagang\ApplyJadwalJanjiController;
 use App\Http\Controllers\pedagang\KontrakController;
 use App\Http\Controllers\pedagang\PedagangDashboardController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\staff\StaffPembayaranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\staff\StaffDashboardController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -45,8 +47,12 @@ Route::middleware(['auth', 'managerMiddleware'])->group(function () {
     Route::get('/manager/kios/available', [ManagerDashboardController::class, 'showAvailableKios'])->name('manager.kios.available');
     Route::get('/manager/kios/occupied', [ManagerDashboardController::class, 'showOccupiedKios'])->name('manager.kios.occupied');
     Route::get('/manager/kios/filter', [ManagerDashboardController::class, 'filterByPasar'])->name('manager.kios.filter');
-    Route::get('manager/pembayaran', [ManagerDashboardController::class, 'showPembayaran'])->name('manager.pembayaran');
-    Route::get('manager/pembayaran/download', [ManagerDashboardController::class, 'downloadHistoryPdf'])->name('manager.pembayaran.download');
+    Route::get('/manager/pembayaran', [ManagerDashboardController::class, 'showPembayaran'])->name('manager.pembayaran');
+    Route::get('/manager/pembayaran/download', [ManagerDashboardController::class, 'downloadHistoryPdf'])->name('manager.pembayaran.download');
+    Route::get('/manager/kontrak',[ManagerKontrakController::class, 'index'])->name('manager.kontrak');
+    Route::post('/manager/kontrak/{kontrak}/approve', [ManagerKontrakController::class, 'approve'])->name('manager.kontrak.approve');
+    Route::get('/manager/kontrak/{kontrak}/download', [ManagerKontrakController::class, 'download'])->name('manager.kontrak.download');
+    
 });
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
