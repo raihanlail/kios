@@ -101,6 +101,10 @@
     </table>
 
     <div class="footer">
+        <div style="position: absolute; left: 0; bottom: 0; text-align: center;">
+            <img src="{{ public_path('qr.png') }}" style="width: 100px; height: 100px;">
+            <div style="font-size: 9pt; margin-top: 5px;">Mengetahui,<br>Ketua PPPJ</div>
+        </div>
         <p>Total Pembayaran: Rp {{ number_format($pembayaran->sum('jumlah'), 0, ',', '.') }}</p>
     </div>
 </body>

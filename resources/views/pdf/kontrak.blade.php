@@ -124,23 +124,27 @@
         </ul>
     </div>
 
-    <div class="signature-area">
-        <div class="signature-box">
+     <div class="signature-area" style="display: flex; justify-content: space-between; margin-top: 30px;">
+        <div class="signature-box" style="text-align: center; flex: 1;">
             <div>PIHAK PERTAMA</div>
             <div class="signature-line"></div>
             <div>({{ strtoupper($pedagang->name) }})</div>
         </div>
         
-        <div class="signature-box">
+        <div class="signature-box" style="text-align: center; flex: 1;">
             <div>PIHAK KEDUA</div>
             <div class="signature-line"></div>
             <div>MANAGER UMUM</div>
         </div>
     </div>
 
-    <div class="footer">
-        <p>Halaman <span class="page-number"></span> - Dokumen ini diterbitkan secara digital pada {{ now()->format('d/m/Y H:i:s') }}</p>
-        <p>{{ config('app.name') }} - {{ config('app.url') }}</p>
+    <div style="position: relative; margin-top: 20px;">
+       <div style="margin-top: 20px; text-align: center;">
+    <img src="{{ public_path('qr.png') }}" style="width: 50px; height: 50px;">
+    <div style="font-size: 9pt; margin-top: 5px;">Mengetahui,<br>Ketua PPPJ</div>
+</div>
+        
+        
     </div>
 </body>
 </html>
