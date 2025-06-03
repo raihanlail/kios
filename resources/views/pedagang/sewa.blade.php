@@ -97,7 +97,7 @@
                             <!-- Tanggal Selesai (auto-calculated) -->
                             <div>
                                 <x-input-label :value="__('Tanggal Selesai Sewa')" />
-                                <x-text-input id="tanggal_selesai" type="text"
+                                <x-text-input id="tanggal_selesai" type="date"
                                     class="mt-1 block w-full bg-gray-100" 
                                     readonly />
                             </div>
