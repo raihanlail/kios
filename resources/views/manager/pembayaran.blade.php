@@ -23,46 +23,47 @@
                     </div>
                 
                 <div class="bg-white rounded-lg shadow-md border-2 border-yellow-500">
-                    <div class="p-6">
-                        <table class="min-w-full divide-y divide-gray-200 text-xs">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID Sewa</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pedagang</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No Telepon</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Pasar</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Kios</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durasi</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Pembayaran</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Sewa</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bukti</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kontrak</th>
-                                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acc Manager</th>
-
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                @foreach($pembayaran as $item)
-                                <tr>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa_id }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->pedagang->name }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->pedagang->email }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->no_telp }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->kios->pasar->nama_pasar }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->kios->nama_kios }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->durasi }} Bulan</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->status }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->status }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap text-xs">
-                                        <a href="{{ asset('storage/' . $item->bukti_pembayaran) }}" target="_blank" class="text-blue-600 hover:text-blue-800">
-                                            Lihat Bukti
-                                        </a>
-                                    </td>
-                                     <td class="px-3 py-3 lg:px-6 lg:py-4 whitespace-nowrap">
-                                               @if($item->sewa->status == 'approved' && $item->sewa->kontrak) 
+                    <div class="p-6 overflow-x-auto"> <!-- Added overflow-x-auto -->
+                        <div class="min-w-full inline-block align-middle"> <!-- Added wrapper div -->
+                            <div class="overflow-hidden">
+                                <table class="min-w-full divide-y divide-gray-200 text-xs">
+                                    <thead>
+                                        <tr>
+                                           
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pedagang</th>
+                                            
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No Telepon</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Pasar</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Kios</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durasi</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Pembayaran</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Sewa</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bukti</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kontrak</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acc Manager</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        @foreach($pembayaran as $item)
+                                        <tr>
+                                            
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->pedagang->name }}</td>
+                                            
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->no_telp }}</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->kios->pasar->nama_pasar }}</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->kios->nama_kios }}</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->durasi }} Bulan</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->status }}</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->status }}</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-xs">
+                                                <a href="{{ asset('storage/' . $item->bukti_pembayaran) }}" target="_blank" class="text-blue-600 hover:text-blue-800">
+                                                    Lihat Bukti
+                                                </a>
+                                            </td>
+                                            <td class="px-3 py-3 lg:px-6 lg:py-4 whitespace-nowrap">
+                                                @if($item->sewa->status == 'approved' && $item->sewa->kontrak) 
                                                     <a href="{{ route('manager.kontrak.download', $item->sewa->kontrak) }}" 
                                                        class="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors duration-200">
                                                         <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -71,20 +72,18 @@
                                                         <span>Download</span>
                                                     </a>
                                                 @else
-                                                <div>
-                                                    <p>Belum Terverifikasi</p>
-                                                </div>
+                                                    <div>
+                                                        <p>Belum Terverifikasi</p>
+                                                    </div>
                                                 @endif
-                                              
                                             </td>
                                             <td class="px-4 py-2 whitespace-nowrap text-xs text-gray-900">{{ $item->sewa->kontrak->manager_acc }}</td>
-                                </tr>
-                                
-                                
-                                
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <div class="mt-4">
                             {{ $pembayaran->links() }}
                         </div>
