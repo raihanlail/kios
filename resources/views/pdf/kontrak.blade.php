@@ -4,67 +4,107 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>KONTRAK SEWA KIOS</title>
     <style>
-         @page { margin: 1.5cm } /* Reduced margin */
+        @page { margin: 1.5cm }
         body { 
             font-family: 'Times New Roman', Times, serif; 
-            font-size: 11pt; /* Reduced from 12pt */
-            line-height: 1.3; /* Reduced from 1.5 */
+            font-size: 11pt;
+            line-height: 1.3;
             background: url('{{ public_path("images/watermark.png") }}') repeat;
         }
+        /* Container utama untuk letterhead */
         .letterhead {
-            text-align: center;
-            margin-bottom: 15px; /* Reduced from 20px */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center; /* Pusatkan vertikal */
+            margin-bottom: 15px;
+            width: 100%;
+            overflow: hidden;
         }
+        
+        /* Container logo */
+        .logo-wrapper {
+            flex: 0 0 auto; 
+            width: 100px; 
+            margin-right: 20px; 
+        }
+        
+        /* Gambar logo */
+        .logo-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Detail letterhead */
+        .letterhead-details {
+            flex: 1; 
+            overflow: hidden;
+        }
+        
         .company-name {
-            font-size: 14pt; /* Reduced from 16pt */
+            font-size: 14pt;
             font-weight: bold;
-            margin-bottom: 3px; /* Reduced from 5px */
+            margin-bottom: 3px;
         }
+        
         .company-tagline {
-            font-size: 10pt; /* Reduced from 12pt */
+            font-size: 10pt;
             font-style: italic;
             margin-bottom: 3px;
         }
+        
         .company-address {
-            font-size: 9pt; /* Reduced from 11pt */
+            font-size: 9pt;
             margin-bottom: 3px;
         }
+        
         .letterhead-line {
-            border-bottom: 2px solid #000; /* Reduced from 3px */
-            margin-top: 8px;
-            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            margin: 8px 0 15px 0;
+            clear: both;
         }
+        
+        
         .header { 
             text-align: center; 
-            margin-bottom: 25px; /* Reduced from 30px */
+            margin-bottom: 25px;
         }
+        
         .title { 
-            font-size: 12pt; /* Reduced from 14pt */
+            font-size: 12pt;
             font-weight: bold; 
             text-decoration: underline;
             text-transform: uppercase;
         }
+        
         .parties { 
             margin: 15px 0;
-            padding: 12px; /* Reduced from 15px */
+            padding: 12px;
         }
+        
         .clause { 
-            margin: 12px 0; /* Reduced from 15px */
+            margin: 12px 0;
         }
+        
         .clause-title { 
             font-weight: bold;
             margin-bottom: 8px;
         }
+        
         .signature-area { 
-            margin-top: 40px; /* Reduced from 50px */
+            margin-top: 40px;
         }
+        
         .signature-line { 
-            width: 75%; /* Reduced from 80% */
-            margin: 40px auto 0 auto; /* Reduced from 50px */
+            width: 75%;
+            margin: 40px auto 0 auto;
         }
+        
         .footer {
-            font-size: 8pt; /* Reduced from 9pt */
+            font-size: 8pt;
         }
+        
         .page-number:after {
             content: counter(page);
         }
@@ -73,15 +113,12 @@
 <body>
     <!-- Kop Surat -->
     <div class="letterhead">
-        <div class="company-name">PERUMDA PASAR PAKUAN JAYA</div>
-        <div class="company-tagline">"Pasar Bersih Belanja Nyaman Pedagang Untung"</div>
-        <div class="company-address">
-           Blok F Trade Center Pasar Kebon Kembang Lt. 3, Jl. Dewi Sartika, Cibogor, Bogor Tengah, Kota Bogor<br>
-            Telp: +62251 8330313 | Email: info@pasarpakuanjaya.co.id<br>
-            Website: https://pasarpakuanjaya.co.id/
+        <div class="logo-wrapper">
+            <img src="{{ public_path('header.png') }}" alt="Logo Perusahaan" style="width: 650px; height: 150px;">
         </div>
-        <div class="letterhead-line"></div>
+       
     </div>
+    <div class="letterhead-line"></div>
 
     <!-- Konten Dokumen -->
     <div class="header">
@@ -124,7 +161,7 @@
         </ul>
     </div>
 
-     <div class="signature-area" style="display: flex; justify-content: space-between; margin-top: 30px;">
+    <div class="signature-area" style="display: flex; justify-content: space-between; margin-top: 30px;">
         <div class="signature-box" style="text-align: center; flex: 1;">
             <div>PIHAK PERTAMA</div>
             <div class="signature-line"></div>
@@ -140,11 +177,9 @@
 
     <div style="position: relative; margin-top: 20px;">
        <div style="margin-top: 20px; text-align: center;">
-    <img src="{{ public_path('qr.png') }}" style="width: 50px; height: 50px;">
-    <div style="font-size: 9pt; margin-top: 5px;">Mengetahui,<br>Ketua PPPJ</div>
-</div>
-        
-        
+            <img src="{{ public_path('qr.png') }}" style="width: 50px; height: 50px;">
+            <div style="font-size: 9pt; margin-top: 5px;">Mengetahui,<br>Ketua PPPJ</div>
+        </div>
     </div>
 </body>
 </html>

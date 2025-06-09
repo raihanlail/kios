@@ -11,6 +11,18 @@
             text-align: center;
             margin-bottom: 15px; /* Reduced from 20px */
         }
+        .logo-wrapper {
+            flex: 0 0 auto; 
+            width: 100px; 
+            margin-right: 20px; 
+        }
+        
+        /* Gambar logo */
+        .logo-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
         .company-name {
             font-size: 14pt; /* Reduced from 16pt */
             font-weight: bold;
@@ -49,12 +61,8 @@
 </head>
 <body>
      <div class="letterhead">
-        <div class="company-name">PERUMDA PASAR PAKUAN JAYA</div>
-        <div class="company-tagline">"Pasar Bersih Belanja Nyaman Pedagang Untung"</div>
-        <div class="company-address">
-           Blok F Trade Center Pasar Kebon Kembang Lt. 3, Jl. Dewi Sartika, Cibogor, Bogor Tengah, Kota Bogor<br>
-            Telp: +62251 8330313 | Email: info@pasarpakuanjaya.co.id<br>
-            Website: https://pasarpakuanjaya.co.id/
+        <div class="logo-wrapper">
+            <img src="{{ public_path('header.png') }}" alt="Logo Perusahaan" style="width: 650px; height: 150px;">
         </div>
         <div class="letterhead-line"></div>
     </div>
