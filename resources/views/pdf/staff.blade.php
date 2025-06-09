@@ -8,8 +8,13 @@
             size: landscape;
         }
         .letterhead {
-            text-align: center;
-            margin-bottom: 15px; /* Reduced from 20px */
+           display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center; /* Pusatkan vertikal */
+            margin-bottom: 15px;
+            width: 100%;
+            overflow: hidden;
         }
         .logo-wrapper {
             flex: 0 0 auto; 
@@ -62,7 +67,7 @@
 <body>
      <div class="letterhead">
         <div class="logo-wrapper">
-            <img src="{{ public_path('header.png') }}" alt="Logo Perusahaan" style="width: 650px; height: 150px;">
+            <img src="{{ public_path('logo-long.png') }}" alt="Logo Perusahaan" style="width: 950px; height: 200px; margin-left: 20px;">
         </div>
         <div class="letterhead-line"></div>
     </div>
