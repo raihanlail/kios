@@ -90,7 +90,7 @@
                 <th>Kios</th>
                 <th>Durasi</th>
                 <th>Jumlah</th>
-                <th>Status Pembayaran</th>
+                <th>Tanggal Awal Sewa</th>
                 <th>Status Sewa</th>
             </tr>
         </thead>
@@ -106,7 +106,7 @@
                 <td>{{ $item->sewa->kios->nama_kios }}</td>
                 <td>{{ $item->sewa->durasi }} Bulan</td>
                 <td class="text-right">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
-                <td>{{ ucfirst($item->status) }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->sewa->tanggal_mulai)->format('d/m/Y') }}</td>
                 <td>{{ ucfirst($item->sewa->status) }}</td>
             </tr>
             @endforeach
